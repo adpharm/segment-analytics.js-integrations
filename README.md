@@ -1,10 +1,47 @@
+# FORK: Analytics.js Integrations
+
+We use this repo to build our custom thumbjs middleware. Then we take the built output, copy + paste it into our Silo repo, and deplyo it via Terraform.
+
+1. Run the devcontainer
+1. Install deps
+
+```bash
+yarn
+```
+
+If the above fails, run
+
+```bash
+yarn add phantomjs-prebuilt -W --global
+```
+
+and that should work.
+
+1. Run the build
+
+```bash
+make build
+```
+
+1. Take the files in [/build/middleware/thumbjs/latest/](/build/middleware/thumbjs/latest/) and add them to our Silo repo for Terraform to pick up.
+
+Changes:
+
+- added `phantomjs-prebuilt` to global [package.json](/package.json)
+- added [thumbjs middleware (Thumbmark)](/middleware/thumbjs/)
+
+---
+
+Below is the original README.
+
 # Analytics.js Integrations
 
-
 ## Introduction
+
 This repo stores the majority of the `analytics.js` integrations that Segment currently supports. It is organized as a monorepo with each individual integration packaged and deployed as their own npm modules.
 
 ## Getting Started
+
 To start contributing, please ensure you have the following installed on your local machine:
 
 - [yarn](https://yarnpkg.com/en/)
@@ -18,6 +55,7 @@ yarn
 ```
 
 ## Contributing
+
 All individual integrations are stored in the `integrations/` directory. We recommend navigating into the individual integration you are contributing to in your terminal rather than working from the root directory:
 
 ```bash
@@ -25,30 +63,38 @@ cd integrations/<INTEGRATION_NAME>
 ```
 
 ### Breaking Changes
+
 Please note, there is currently no way for user's of these integrations to choose specific versions. **Therefore, all changes must always be fully backwards compatible**. If a change is breaking it will not be considered.
 
 ### Adding Dependencies
+
 If you need to add an external dependency to an integration, **please ensure you add it within the integration directory, not the root directory**. That being said, please keep in mind that these integrations are run client side. Please only add external dependencies if it is critical to your code changes.
 
 ### Running Tests
+
 Each integration directory has an npm script called `test` that you can use to easily run the unit tests with via `yarn test`.
 
 ### Test Locally
-To test changes locally you can run: 
+
+To test changes locally you can run:
 
 ```
 yarn --cwd tester install
 yarn dev
 ```
-This will open the local development environment. To test a particular destination, enter a writeKey that has the destination connected, and the tool will load Analytics.js with the local version of the destinations connected, and the settings for the source. After the first load, you can referesh the page without having to load the writeKey each time. 
 
-If you want to test a new destination or a new settings parameter, you can override the settings using the integrated JSON editor. To fire track, page, etc. calls, you can use the Chrome DevTools and fire events using `analytics.track( .... )` etc. 
+This will open the local development environment. To test a particular destination, enter a writeKey that has the destination connected, and the tool will load Analytics.js with the local version of the destinations connected, and the settings for the source. After the first load, you can referesh the page without having to load the writeKey each time.
+
+If you want to test a new destination or a new settings parameter, you can override the settings using the integrated JSON editor. To fire track, page, etc. calls, you can use the Chrome DevTools and fire events using `analytics.track( .... )` etc.
 
 ### Code Formatting
+
 This project uses eslint to ensure uniform code formatting standards are maintained. You can see the specific eslint config in the root `.eslintrc` file. A pre-commit hook is used to help automate this process for you.
 
 ### Pull Requests
+
 Please make sure your PR includes the new version in `package.json` as well as an update to the integration's HISTORY.md file describing the change.
 
 ### Releasing
+
 All releases are handled by Segment engineers. Releases will be managed after a change has been approved and merged.
