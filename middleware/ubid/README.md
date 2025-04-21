@@ -2,6 +2,8 @@
 
 This is our custom Thumbmark middleware to add thumbprint data to events sent to Silo.
 
+UBID = User-Browser ID
+
 ## Types
 
 ```ts

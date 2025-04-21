@@ -1,6 +1,6 @@
 {
-  "name": "thumbjs",
-  "description": "Thumbmark custom analytics.js middleware",
+  "name": "ubid",
+  "description": "UBID custom analytics.js middleware",
   "version": "0.1.0",
   "keywords": [
     "analytics.js",
